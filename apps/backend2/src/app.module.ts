@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config'
 import { DatabaseModule } from './database/database.module';
 import { FrightModule } from './fright/fright.module';
+import { HttpLoggerMiddleware } from './middlewares/http-logger.middleware';
 
 @Module({
   imports: [
@@ -12,4 +13,8 @@ import { FrightModule } from './fright/fright.module';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*');
+  }
+ }

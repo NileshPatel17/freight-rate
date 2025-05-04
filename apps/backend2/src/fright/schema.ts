@@ -6,7 +6,7 @@ export const fright_quote = pgTable('fright_quote', {
     destination_port: text('destination_port'),
     container_type: text('container_type'),
     carrier: text('carrier'),
-    fright_rate: integer('right_rate'),
+    fright_rate: integer('fright_rate'),
     effective_date: timestamp('effective_date'),
     created_at: timestamp('created_at').defaultNow(),
     updated_at: timestamp('updated_at').defaultNow(),

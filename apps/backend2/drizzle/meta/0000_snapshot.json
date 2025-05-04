@@ -39,7 +39,7 @@
           "notNull": false
         },
         "right_rate": {
-          "name": "right_rate",
+          "name": "fright_rate",
           "type": "integer",
           "primaryKey": false,
           "notNull": false

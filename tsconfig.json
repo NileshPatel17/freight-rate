@@ -10,15 +10,6 @@
       "path": "./apps/frontend"
     },
     {
-      "path": "./apps/backend-e2e"
-    },
-    {
-      "path": "./apps/backend"
-    },
-    {
-      "path": "./apps/backend2-e2e"
-    },
-    {
       "path": "./apps/backend2"
     }
   ]
