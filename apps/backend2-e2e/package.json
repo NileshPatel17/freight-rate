@@ -1,10 +1,10 @@
 {
-  "name": "@fright-rate/backend-e2e",
+  "name": "@fright-rate/backend2-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@fright-rate/backend"
+      "@fright-rate/backend2"
     ],
     "targets": {
       "e2e": {
@@ -13,11 +13,11 @@
           "{projectRoot}/test-output/jest/coverage"
         ],
         "options": {
-          "jestConfig": "apps/backend-e2e/jest.config.ts",
+          "jestConfig": "apps/backend2-e2e/jest.config.ts",
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@fright-rate/backend:build"
+          "@fright-rate/backend2:build"
         ]
       }
     }
