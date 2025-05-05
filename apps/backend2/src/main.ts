@@ -14,14 +14,14 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   app.enableCors();
   const config = new DocumentBuilder()
-    .setTitle('Fright Rate API')
+    .setTitle('Freight Rate API')
     .setDescription('The API description')
     .setVersion('1.0')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3200;
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
