@@ -8,6 +8,13 @@
       "when": 1746351393395,
       "tag": "0000_low_thena",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746508353936,
+      "tag": "0001_woozy_talos",
+      "breakpoints": true
     }
   ]
 }

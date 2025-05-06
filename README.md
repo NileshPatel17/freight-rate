@@ -3,6 +3,7 @@
 ## Pre requisite
 
 1. Ensure that postgres db server is running and create a new database
+2. node and npm
 
 ## Run tasks
 
@@ -30,21 +31,34 @@ VITE_API_HOST_URL=http://localhost:3200/api/
 ```
 
 ### Step 4. Db Migration
-Run below command to create db tables
+- Navigate to apps/backend2 directory
+- Run below command to create db tables
+(Ensure that you are at apps/backend2 directory)
 ```sh
-npx drizzle-kit push --config ./apps/backend2/drizzle.config.ts
+npx drizzle-kit push
 ```
+![Description](/assets//migration.png)
 
 ### Step 5. Run Backend server
 
-To run backend server for your app, use:
-
+To run backend server for your app, run below command:
+(Ensure that you are at root directory)
 ```sh
-npx nx serve frontend
+npx nx serve backend2
 ```
+![Description](/assets//backend.png)
 
 ### Step 6. Run frontend app
-To run frontend app, use:
+To run frontend app, run below command:
+(Ensure that you are at root directory)
 ```sh
 npx nx serve frontend
 ```
+Ensure that you are at root directory
+![Description](/assets//frontend.png)
+
+
+### API Documentation
+you can access by visiting http://localhost:3200/api-docs
+ensure that backend server is running
+![Description](/assets//swagger.png)

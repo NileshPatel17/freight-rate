@@ -7,12 +7,13 @@ import { useToast } from './Toast';
 import TablePagination from './Table/TablePagination';
 import { csvToJson } from '../utils';
 import { FileData, Quote } from '../types';
+import { Spinner } from './Spinner';
 
 const fieldAliases = {
     origin_port: ["Origin", "Origin Port", "POL"],
     destination_port: ["Destination", "Destination Port", "POD", "DEST."],
     container_type: ["Container Type"],
-    carrier:['carrier'],
+    carrier: ['carrier'],
     fright_rate: ["Ocean Freight Rate", "O/F", "20'GP", "40'GP"],
     effective_date: ["Effective Date", "EFFECTIVE"],
 };
@@ -41,7 +42,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ onOk, onClose }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const { showToast } = useToast();
     const [currentPage, setCurrentPage] = useState(1)
-    const [isLoading, setIsLoading]=useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [fileData, setFileData] = useState<FileData | null>(null);
     const totalPages = fileData ? Math.ceil(fileData?.rows?.length / pageSize) : 0;
 
@@ -108,29 +109,29 @@ const UploadModal: React.FC<UploadModalProps> = ({ onOk, onClose }) => {
         const baseUrl = import.meta.env.VITE_API_HOST_URL;
         setIsLoading(true)
         fetch(`${baseUrl}fright/quotes/bulk`, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(payload)
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
         }).then(async response => {
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Error ${response.status}: ${errorData.message || 'Bad Request'}`);
-          }
-          return response.json();
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(`Error ${response.status}: ${errorData.message || 'Bad Request'}`);
+            }
+            return response.json();
         })
-          .then(async res => {
-            onOk()
-            showToast('Quote uploaded successfully!', 'success');
-          })
-          .catch(err => {
-            showToast('Server Error!' , 'error');
-          })
-          .finally(() => {
-            setIsLoading(false)
-          })
-      }
+            .then(async res => {
+                onOk()
+                showToast('Quote uploaded successfully!', 'success');
+            })
+            .catch(err => {
+                showToast('Server Error!', 'error');
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
+    }
     const handleSubmit = () => {
         const fieldMapper: Record<string, string> = {}
         const headers = fileData!.headers;
@@ -233,10 +234,11 @@ const UploadModal: React.FC<UploadModalProps> = ({ onOk, onClose }) => {
                             Cancel
                         </button>
                         <button
-                            className="px-4 py-1 text-sm bg-black text-white rounded-md hover:bg-gray-600 focus:outline-none disabled:bg-gray-400"
+                            className="flex gap-2 px-4 py-1 text-sm bg-black text-white rounded-md hover:bg-gray-600 focus:outline-none disabled:bg-gray-400"
                             onClick={handleSubmit}
-                            disabled={!!!fileData}
+                            disabled={!!!fileData || isLoading}
                         >
+                            {isLoading ? <Spinner size={4} /> : null}
                             Process Shipments
                         </button>
                     </div>

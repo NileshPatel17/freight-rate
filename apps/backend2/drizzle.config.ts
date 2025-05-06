@@ -1,11 +1,14 @@
 import { defineConfig } from 'drizzle-kit';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
 
 export default defineConfig({
-  schema: './apps/backend2/src/**/schema.ts',
-  out: './apps/backend2/drizzle',
+  schema: './src/**/schema.ts',
+  out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: `postgres://postgres:postgres@localhost:5432/fright_rate`,
-    // url: `${process.env.DATABASE_URL}`,
+    url: process.env.DATABASE_URL!,
   },
 });
