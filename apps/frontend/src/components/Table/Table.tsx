@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react';
 import TablePagination from './TablePagination';
-import { Spinner } from '../Spinner';
 
 export interface Column<T> {
   id: string;
@@ -35,58 +33,20 @@ function Table<T>({
   bordered = false,
 }: TableProps<T>) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortConfig, setSortConfig] = useState<{
-    key: string | null;
-    direction: 'asc' | 'desc' | null;
-  }>({ key: null, direction: null });
 
-  // Sort data if sortConfig is set
   const sortedData = useMemo(() => {
     const sortableData = data ? [...data] : [];
-    if (sortConfig.key && sortConfig.direction) {
-      sortableData.sort((a: any, b: any) => {
-        const aValue = a[sortConfig.key as keyof T];
-        const bValue = b[sortConfig.key as keyof T];
-
-        if (aValue < bValue) {
-          return sortConfig.direction === 'asc' ? -1 : 1;
-        }
-        if (aValue > bValue) {
-          return sortConfig.direction === 'asc' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
     return sortableData;
-  }, [data, sortConfig]);
+  }, [data]);
 
-  // Calculate pagination
   const totalPages = Math.ceil(sortedData.length / pageSize);
+
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     return sortedData.slice(startIndex, startIndex + pageSize);
   }, [sortedData, currentPage, pageSize]);
 
-  // Handle sorting
-  const handleSort = (columnId: string) => {
-    let direction: 'asc' | 'desc' | null = 'asc';
 
-    if (sortConfig.key === columnId) {
-      if (sortConfig.direction === 'asc') {
-        direction = 'desc';
-      } else if (sortConfig.direction === 'desc') {
-        direction = null;
-      }
-    }
-
-    setSortConfig({ key: direction ? columnId : null, direction });
-  };
-
-  // Get sort icon
-  const getSortIcon = (columnId: string) => {
-    if (sortConfig.key !== columnId) return <ChevronsUpDown size={16} />;
-    return sortConfig.direction === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
-  };
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto">
@@ -101,13 +61,9 @@ function Table<T>({
                       scope="col"
                       className={`px-6 py-3 text-left text-base font-bold text-gray-600 tracking-wider ${column.sortable ? 'cursor-pointer select-none' : ''
                         } ${column.className || ''}`}
-                      onClick={column.sortable ? () => handleSort(column.id) : undefined}
                     >
                       <div className="flex items-center space-x-1">
                         <span>{column.header}</span>
-                        {column.sortable && (
-                          <span className="inline-flex">{getSortIcon(column.id)}</span>
-                        )}
                       </div>
                     </th>
                   ))}
@@ -117,8 +73,8 @@ function Table<T>({
                 {
                   isLoading && (
                     <tr>
-                      <td colSpan={columns.length} className="py-2">
-                        <Spinner />
+                      <td colSpan={columns.length} className="text-center py-2">
+                        Loading...
                       </td>
                     </tr>
                   )

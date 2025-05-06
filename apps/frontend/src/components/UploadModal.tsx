@@ -152,7 +152,6 @@ const UploadModal: React.FC<UploadModalProps> = ({ onOk, onClose }) => {
             }, {});
         })
         uploadQuotes(finalRows)
-        // onOk(finalRows, fieldMapper);
     };
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">

@@ -48,8 +48,7 @@ const columns = [
 export function App() {
   const { showToast } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModal2Open, setIsModal2Open] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [quotes, setQuotes] = useState<Quote[] | null>(null);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -70,35 +69,7 @@ export function App() {
         setIsLoading(false)
       })
   }
-  const uploadQuotes = (payload: Quote[]) => {
-    const baseUrl = import.meta.env.VITE_API_HOST_URL;
-    setIsLoading(true)
-    fetch(`${baseUrl}fright/quotes/bulk`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }).then(async response => {
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Error ${response.status}: ${errorData.message || 'Bad Request'}`);
-      }
-      return response.json();
-    })
-      .then(async res => {
-        showToast('Quote uploaded successfully!', 'success');
-        fetchQuotes();
-        setIsModal2Open(false)
-      })
-      .catch(err => {
-        showToast('Server Error!' , 'error');
-        setQuotes([])
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
+
   useEffect(() => {
     fetchQuotes()
   }, [])
@@ -135,7 +106,6 @@ export function App() {
         striped
         bordered
       />
-      {/* <QuotesTable isLoading={isLoading} data={quotes} /> */}
     </div>
   );
 }

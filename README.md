@@ -2,16 +2,25 @@
 
 ## Pre requisite
 
-1. Ensure that postgres db server is running and create a new database
-2. node and npm
+1. Ensure that postgres db server is running.
+2. create a new database. That needs to be setup in .env file for backend
+3. node and npm
 
-## Run tasks
+
+## Tools
+- Backend - Nestjs
+- Frontend - reactjs with Vite
+- Database - Postgres
+- ORM - Drizzle
+- monorepo - Nx workspace
+
+## Run Applications
 
 ### Step 1. Install dependencies
 
 run below command at the root directory of the project
 ```sh
-npm install
+npm install --force
 ```
 
 ### Step 2. Setup Environment variables for Backend
@@ -19,8 +28,7 @@ add below key value to .env file located at apps/backend2
 ```sh
 DATABASE_URL=postgres://<username>:<password>@<host>:<port>/<db_name>
 ```
-
-If i have postgres running locally having user 'postgres', password 'admin', port '5432', db name 'fright_rate' then url will be like this
+sample value
 ```sh
 DATABASE_URL=postgres://postgres:admin@localhost:5432/fright_rate
 ```
@@ -59,6 +67,14 @@ Ensure that you are at root directory
 
 
 ### API Documentation
-you can access by visiting http://localhost:3200/api-docs
-ensure that backend server is running
+ Swagger docs for the API will be accessible locally via URI "**http://localhost:3200/api-docs**"
+**Ensure that backend server is running**
 ![Description](/assets//swagger.png)
+
+### Application Demo
+~[demo](/assets//demo.mp4)
+### Improvement/To do
+- [ ] Frontend: usage of state management to maange application state
+- [ ] Frontend: allow custom column mapper to choose before proceeding with upload
+- [ ] Frontend: usage of axios package. as of now i have used native fetch api to interact with api. We can write a wrapper to access backend api.
+- [ ] Frontend: In case of upload fails, showing more user friendly error message
