@@ -21,6 +21,7 @@
     "@nestjs/config": "^4.0.2",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/swagger": "^11.1.6",
+    "@nestjs/terminus": "^11.0.0",
     "@nestjs/testing": "^10.0.2",
     "@nx/devkit": "20.8.1",
     "@nx/eslint": "20.8.1",
