@@ -72,7 +72,8 @@ Ensure that you are at root directory
 ![Description](/assets//swagger.png)
 
 ### Application Demo
-~[demo](/assets//demo.mp4)
+Download Video from below link
+- [demo](/assets//demo.mp4)
 ### Improvement/To do
 - [ ] Frontend: usage of state management to maange application state
 - [ ] Frontend: allow custom column mapper to choose before proceeding with upload
